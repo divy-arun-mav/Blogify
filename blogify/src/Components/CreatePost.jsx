@@ -10,9 +10,6 @@ const CreatePost = () => {
 
   const postData = async (e) => {
     e.preventDefault();
-
-    console.log(url, desc);
-
     try {
       const res = await fetch("http://localhost:5000/createPost", {
         method: "POST",
@@ -32,6 +29,7 @@ const CreatePost = () => {
       } else {
         const errorResponse = await res.json();
         console.log("Error response from server: ", errorResponse);
+        toast.error("An error occurred");
       }
     } catch (e) {
       console.log(e);

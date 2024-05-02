@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { toast } from 'react-toastify';
 
 const Posts = () => {
   const api = "http://localhost:5000/allposts";
@@ -12,11 +13,11 @@ const Posts = () => {
       });
       if (res.status === 200) {
         const response = await res.json();
-        console.log("response from server ", response);
         setData(response);
       } else {
         const errorResponse = await res.json();
         console.log("Error response from server: ", errorResponse);
+        toast.error("An error occurred");
       }
     } catch (e) {
       console.log(e);

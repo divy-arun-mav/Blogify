@@ -15,8 +15,7 @@ const Login = () => {
             const res = await fetch("http://localhost:5000/signin", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer " + localStorage.getItem("jwt")
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     username,
@@ -26,7 +25,6 @@ const Login = () => {
 
             if (res.status === 200) {
                 const response = await res.json();
-                console.log("response from server ", response);
                 localStorage.setItem("jwt", response.token);
                 localStorage.setItem("username", response.user.name);
                 toast.success("Login Succesfull!!!")
@@ -34,6 +32,7 @@ const Login = () => {
             } else {
                 const errorResponse = await res.json();
                 console.log("Error response from server: ", errorResponse);
+                toast.error("An error occurred");
             }
         } catch (e) {
             console.log(e);
@@ -48,7 +47,7 @@ const Login = () => {
                 <label className='text-left w-full mb-1' htmlFor="url">Username</label>
                 <input className='border-2 border-black rounded-md w-full pl-1' value={username} onChange={(e) => { setUsername(e.target.value) }} type="text" name="username" />
                 <label className='text-left w-full mb-1' htmlFor="desc">Password</label>
-                <input className='border-2 border-black rounded-md w-full' value={password} onChange={(e) => { setPassword(e.target.value) }} type="password" name="password" />
+                <input className='border-2 border-black rounded-md w-full pl-1' value={password} onChange={(e) => { setPassword(e.target.value) }} type="password" name="password" />
                 <button className='border-2 border-black  hover:text-white hover:bg-black py-1 px-3 rounded-md my-3' type='submit'>Login</button>
             </form>
         </div>

@@ -22,6 +22,7 @@ const Profile = () => {
       } else {
         const errorResponse = await res.json();
         console.log("Error response from server: ", errorResponse);
+        toast.error("An error occurred");
       }
     } catch (e) {
       console.log(e);
